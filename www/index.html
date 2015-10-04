@@ -49,7 +49,7 @@
 </head>
 <body>
 <div id="f1">
-	<h4>一、随机密码的长度6~32(请选择)</h4>
+	<h4>一、选择密码的长度6~32</h4>
 		<input id="charlength" type="range" value="8" min="6" max="32">
 		<label>8</label>
 	<h4>二、请选择随机密码的类型</h4>
@@ -203,6 +203,7 @@
 		<button id="copy">复制密码</button>
 		<br><p id="msg"></p>
 </div>
+<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
 <script>
 	function $ (select){return document.querySelector(select)}
 	function $$(select,con){return (document || con).querySelectorAll(select)}
@@ -252,25 +253,26 @@
 	}
 	document.body.onload = function(){
 		$("#get").onclick()
-		$("#copy").onclick = (function(){
-			if (window.clipboardData) {
-				return function () {
-					window.clipboardData.clearData();
-					window.clipboardData.setData("Text", $("#result").value);
-					msg.textContent = "已经复制到粘贴板";
-					msg.style.display = 'inline';
-					setTimeout("msg.style.display = 'none';", 1000);
-				}
-			}else{
-				return function () {
-					$("#result").select();
-					msg.textContent = "请Ctrl+C复制密码到剪贴板";
-					msg.style.display = 'inline';
-					setTimeout("msg.style.display = 'none';", 1000);
-				}
+		if (document.execCommand) {
+			// use clipboard.min.js
+		} else if (window.clipboardData){
+			// work for ie8
+			$("#copy").onclick = function () {
+				window.clipboardData.clearData();
+				window.clipboardData.setData("Text", $("#result").value);
+				msg.textContent = "已经复制到粘贴板";
+				msg.style.display = 'inline';
+				setTimeout("msg.style.display = 'none';", 1000);
 			}
-		}())
-		document.body.onload = undefined;
+		} else {
+			// Safari or Chrome 42-
+			$("#copy").onclick = function () {
+				$("#result").select();
+				msg.textContent = "请Ctrl+C复制密码到剪贴板";
+				msg.style.display = 'inline';
+				setTimeout("msg.style.display = 'none';", 1000);
+			}
+		}
 	}
 </script>
 </body>
