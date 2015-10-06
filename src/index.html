@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<title>密码生成器</title>
+	<meta content="密码,生成,器,密码生成器" name="Keywords">
+	<meta content="密码生成器" name="Description">
+
+	<link href="./css/ionic.min.css" rel="stylesheet">
+	<link href="./css/style.css" rel="stylesheet">
+</head>
+<body ng-app="main" ng-controller="base">
+<ion-nav-bar class="nav-title-slide-ios7 bar-positive"></ion-nav-bar>
+
+<ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+<ion-tabs class="tabs-icon-top tabs-positive">
+
+	<ion-tab title="文字密码" icon="ion-home" ui-sref="text">
+		<ion-nav-view name="text-tab"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab title="图案密码" icon="ion-ios7-information" ui-sref="patten">
+		<ion-nav-view name="patten-tab"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab title="密码强度" icon="ion-ios7-world" ui-sref="strong">
+		<ion-nav-view name="strong-tab"></ion-nav-view>
+	</ion-tab>
+
+</ion-tabs>
+
+<script src="./js/ionic.bundle.min.js"></script>
+<script src="./js/clipboard.min.js"></script>
+<script src="./js/templates.js"></script>
+<script src="./js/app.js"></script>
+
+
+<!-- <script id="demoView.html" type="text/ng-template">
+</script> -->
+</body>
+</html>

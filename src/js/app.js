@@ -1,36 +1,35 @@
-angular.module('main', ['ionic'])
+angular.module('main', ['ionic', 'templates'])
 
-.run(function($ionicPlatform) {
+.run( $ionicPlatform => {
 	$ionicPlatform.ready(function() {
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-		  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-		  cordova.plugins.Keyboard.disableScroll(true);
-
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+			cordova.plugins.Keyboard.disableScroll(true);
 		}
 		if (window.StatusBar) {
-		  StatusBar.styleLightContent();
+			StatusBar.styleLightContent();
 		}
 	})
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(($stateProvider, $urlRouterProvider) => {
 	$stateProvider
 
 	.state('text', {
 		url: '/text',
-		templateUrl: './views/text.html',
+		templateUrl: 'text.html',
 		controller: 'textCtl'
 	})
 
 	.state('patten', {
 		url: '/patten',
-		templateUrl: './views/patten.html',
+		templateUrl: 'patten.html',
 		controller: 'pattenCtl'
 	})
 
 	.state('strong', {
 		url: '/strong',
-		templateUrl: './views/strong.html',
+		templateUrl: 'strong.html',
 		controller: 'strongCtl'
 	})
 
@@ -38,12 +37,12 @@ angular.module('main', ['ionic'])
 })
 
 .controller('base', function(){
-	function $ (select){return document.querySelector(select)}
-	function $$(select,con){return (document || con).querySelectorAll(select)}
+	// function $ (select){return document.querySelector(select)}
+	// function $$(select,con){return (document || con).querySelectorAll(select)}
 })
 
 .controller('textCtl', function($scope, $http){
-
+/*
 	function rndChar (s) {return s[Math.floor(Math.random()*s.length)] || ''}
 
 	var len = $("#charlength"),
@@ -78,7 +77,7 @@ angular.module('main', ['ionic'])
 	document.body.onload = function(){
 		$("#get").onclick()
 		if (document.execCommand) {
-			use clipboard.min.js
+			// use clipboard.min.js
 			
 		} else if (window.clipboardData){
 			// work for ie8
@@ -99,6 +98,7 @@ angular.module('main', ['ionic'])
 			}
 		}
 	}
+*/
 })
 
 .controller('pattenCtl', function($scope){
