@@ -85,3 +85,9 @@ gulp.task('default', ['minCss', 'minJs', 'ngTemplate']);
 gulp.task('test', () => gulp.src(['src/js/*.js', '!src/js/*.min.js'])
 	.pipe(gulp.dest('temp'))
 );
+
+gulp.task('babel', () => {
+	gulp.src('src/es6/*.js')
+		.pipe(babel())
+		.pipe(gulp.dest('src/js'))
+});
