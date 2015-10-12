@@ -12,7 +12,7 @@
 	<link href="./css/ionic.min.css" rel="stylesheet">
 	<link href="./css/style.css" rel="stylesheet">
 </head>
-<body ng-app="main" ng-controller="base">
+<body ng-app="main" ng-controller="base" ng-repeat="(key, value) in dataset">
 <ion-nav-bar class="nav-title-slide-ios7 bar-positive"></ion-nav-bar>
 
 <ion-nav-view animation="slide-left-right"></ion-nav-view>
@@ -37,54 +37,56 @@
 <script src="./js/app.js"></script>
 <script src="./js/clipboard.min.js"></script>
 
-
 <script id="text.html" type="text/ng-template">
 <ion-view title="文本密码" class="bg-dark">
-	<h3>一、选择密码的长度6~32</h3>
+<ion-content>
 
+	<h3>一、选择密码的长度6~32</h3>
 	<div class="range range-dark">
-		<input type="range" value="8" min="6" max="32"
-		 ng-model="passWordLength"
-		 ng-change="" />
+		<input type="range" min="6" max="32" ng-model="passWordLength"/>
 		<label>{{passWordLength}}</label>
 	</div>
 
 	<h3>二、选择随机密码的类型</h3>
-
-	<ul class="item list">
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">数字</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">小写字母</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">大写字母</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">特殊符号</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">希腊字母</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">简体汉字</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">繁体汉字</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">日文字符</ion-toggle>
-		<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">韩文字符</ion-toggle>
-	</ul>
+	<div class="row">
+		<div class="col">
+			<ion-toggle ng-repeat="type in types" toggle-class="toggle-calm"
+			 ng-model="type.checked" ng-change="getPassWord()">
+			 	{{type.name}}
+			</ion-toggle>
+		</div>
+		<div class="col">
+		</div>
+	</div>
 
 	<h3>三、生成密码</h3>
+	<label class="item item-input">
+		<input type="text" ng-model="result"/>
+		<i class="icon ion-search" ng-click="copy()"></i>
+	</label>
+	<button class="button button-calm" ng-click="getPassWord()">
+		 生成密码
+	</button>
 
-	<div class="item">
-		<input type="text" ng-model="result" id="result" size="36" />
-		<button id="get" ng-click="create()">生成密码</button>
-		<button id="copy" ng-click="copy()">复制密码</button>
-	</div>
+</ion-content>
 </ion-view>
 </script>
 
 <script id="patten.html" type="text/ng-template">
 <ion-view title="图案密码" class="bg-dark">
+<ion-content>
 
+</ion-content>
 </ion-view>
 </script>
 
 <script id="strong.html" type="text/ng-template">
 <ion-view title="密码强度检测" class="bg-dark">
+<ion-content>
 
+</ion-content>
 </ion-view>
 </script>
-
 
 </body>
 </html>

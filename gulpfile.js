@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
+	scss = require('gulp-scss'),
 	babel = require('gulp-babel'),
 	ngmin = require('gulp-ngmin'),
 	uglify = require('gulp-uglify'),
@@ -90,4 +91,15 @@ gulp.task('babel', () => {
 	gulp.src('src/es6/*.js')
 		.pipe(babel())
 		.pipe(gulp.dest('src/js'))
+});
+
+gulp.task('scss',() => {
+    gulp.src('src/scss/*.scss')
+    	.pipe(scss())
+    	.pipe(gulp.dest('src/scss'))
+});
+
+gulp.task('watch', () => {
+	gulp.watch('src/es6/*.js', ['babel']);
+	gulp.watch('src/scss/*.scss', ['scss']);
 });

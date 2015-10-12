@@ -26,65 +26,81 @@ angular.module('main', ['ionic']).run(function ($ionicPlatform) {
 	});
 
 	$urlRouterProvider.otherwise('/text');
-}).controller('base', function () {
-	// function $ (select){return document.querySelector(select)}
-	// function $$(select,con){return (document || con).querySelectorAll(select)}
+}).controller('base', function ($scope) {
+	$scope.qs = function (select) {
+		return document.querySelector(select);
+	};
+	$scope.qsa = function (select, con) {
+		return (document || con).querySelectorAll(select);
+	};
+	$scope.rndChar = function (s) {
+		return s[Math.floor(Math.random() * s.length)] || '';
+	};
 }).controller('textCtl', function ($scope, $http) {
-	/*
- 	function rndChar (s) {return s[Math.floor(Math.random()*s.length)] || ''}
- 
- 	var len = $("#charlength"),
- 		type = $$("#type input"),
- 		// msg = $("#msg"),
- 		lab = $("#charlength+label");
- 	for (var i = 0; i < type.length; i++){
- 		type[i].onchange = getPrassWord;
- 	}
- 	$("#get").onclick = getPrassWord;
- 	function valueChange () {
- 		lab.textContent = this.value;
- 		getPrassWord();
- 	}
- 
- 	len.addEventListener("input",valueChange)
- 
- 	function getPrassWord(){
- 		var rc = "";
- 		for (var i = 0, len1 = +len.value; i < len1; i++){
- 			// 重置候选组,避免重复
- 			var charSet = "";
- 			// 保证各种字符的频度一致
- 			for (var j = 0,len2 = type.length; j < len2; j++) {
- 				if (type[j].checked) {
- 					charSet += rndChar(dict[j]);};};
- 
- 			rc += rndChar(charSet);
- 		}
- 		$("#result").value = rc;
- 	}
- 	document.body.onload = function(){
- 		$("#get").onclick()
- 		if (document.execCommand) {
- 			// use clipboard.min.js
- 			
- 		} else if (window.clipboardData){
- 			// work for ie8
- 			$("#copy").onclick = function () {
- 				window.clipboardData.clearData();
- 				window.clipboardData.setData("Text", $("#result").value);
- 				msg.textContent = "已经复制到粘贴板";
- 				msg.style.display = 'inline';
- 				setTimeout("msg.style.display = 'none';", 1000);
- 			}
- 		} else {
- 			// Safari or Chrome 42-
- 			$("#copy").onclick = function () {
- 				$("#result").select();
- 				msg.textContent = "请Ctrl+C复制密码到剪贴板";
- 				msg.style.display = 'inline';
- 				setTimeout("msg.style.display = 'none';", 1000);
- 			}
- 		}
- 	}
- */
+
+	var Len = $scope.qs('#len');
+
+	$http.get('../modules/dict.json', {
+		cache: true
+	}).success(function (data) {
+		$scope.dict = data;
+	});
+
+	$scope.passWordLength = 8;
+
+	$scope.$watch($scope.passWordLength, $scope.getPassWord);
+
+	$scope.types = [{
+		name: "数字",
+		checked: true
+	}, {
+		name: "特殊符号",
+		checked: true
+	}, {
+		name: "小写字母",
+		checked: true
+	}, {
+		name: "大写字母",
+		checked: true
+	}, {
+		name: "简体汉字",
+		checked: false
+	}, {
+		name: "繁体汉字",
+		checked: false
+	}, {
+		name: "日文字符",
+		checked: false
+	}, {
+		name: "韩文字符",
+		checked: false
+	}, {
+		name: "希腊字母",
+		checked: false
+	}];
+
+	$scope.getPassWord = function () {
+		var rc = "";
+		for (var i = 0; i < $scope.passWordLength; i++) {
+			// 重置候选组,避免重复
+			var charSet = "";
+			// 保证各种字符的频度一致
+			for (var j = 0, len2 = $scope.types.length; j < len2; j++) {
+				if ($scope.types[j].checked === true) {
+					charSet += $scope.rndChar($scope.dict[j]);
+				};
+			};
+
+			rc += $scope.rndChar(charSet);
+		}
+		$scope.result = rc;
+		console.log($scope.result);
+		console.log($scope.charLen);
+	};
 }).controller('pattenCtl', function ($scope) {}).controller('strongCtl', function ($scope) {});
+
+// .filter('col2', () => {
+// 	index => {
+// 		if (index%2 === 1) {return null};
+// 	}
+// })
