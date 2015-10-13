@@ -13,16 +13,13 @@ angular.module('main', ['ionic']).run(function ($ionicPlatform) {
 }).config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('text', {
 		url: '/text',
-		templateUrl: 'text.html',
-		controller: 'textCtl'
+		templateUrl: 'text.html'
 	}).state('patten', {
 		url: '/patten',
-		templateUrl: 'patten.html',
-		controller: 'pattenCtl'
+		templateUrl: 'patten.html'
 	}).state('strong', {
 		url: '/strong',
-		templateUrl: 'strong.html',
-		controller: 'strongCtl'
+		templateUrl: 'strong.html'
 	});
 
 	$urlRouterProvider.otherwise('/text');
@@ -37,70 +34,36 @@ angular.module('main', ['ionic']).run(function ($ionicPlatform) {
 		return s[Math.floor(Math.random() * s.length)] || '';
 	};
 }).controller('textCtl', function ($scope, $http) {
-
-	var Len = $scope.qs('#len');
+	$scope.charlen = 8;
+	$scope.result = 88888888;
 
 	$http.get('../modules/dict.json', {
 		cache: true
 	}).success(function (data) {
-		$scope.dict = data;
+		$scope.types = data;
 	});
-
-	$scope.passWordLength = 8;
-
-	$scope.$watch($scope.passWordLength, $scope.getPassWord);
-
-	$scope.types = [{
-		name: "数字",
-		checked: true
-	}, {
-		name: "特殊符号",
-		checked: true
-	}, {
-		name: "小写字母",
-		checked: true
-	}, {
-		name: "大写字母",
-		checked: true
-	}, {
-		name: "简体汉字",
-		checked: false
-	}, {
-		name: "繁体汉字",
-		checked: false
-	}, {
-		name: "日文字符",
-		checked: false
-	}, {
-		name: "韩文字符",
-		checked: false
-	}, {
-		name: "希腊字母",
-		checked: false
-	}];
 
 	$scope.getPassWord = function () {
 		var rc = "";
-		for (var i = 0; i < $scope.passWordLength; i++) {
+		for (var i = 0; i < $scope.charlen; i++) {
 			// 重置候选组,避免重复
 			var charSet = "";
 			// 保证各种字符的频度一致
 			for (var j = 0, len2 = $scope.types.length; j < len2; j++) {
 				if ($scope.types[j].checked === true) {
-					charSet += $scope.rndChar($scope.dict[j]);
-				};
-			};
+					charSet += $scope.rndChar($scope.types[j].dict);
+				}
+			}
 
 			rc += $scope.rndChar(charSet);
 		}
 		$scope.result = rc;
-		console.log($scope.result);
-		console.log($scope.charLen);
 	};
-}).controller('pattenCtl', function ($scope) {}).controller('strongCtl', function ($scope) {});
-
-// .filter('col2', () => {
-// 	index => {
-// 		if (index%2 === 1) {return null};
-// 	}
-// })
+}).controller('pattenCtl', function ($scope) {}).controller('strongCtl', function ($scope) {}).filter('col2', function () {
+	return function (data, str) {
+		// if (index%2 === 1) {return null};
+		console.log(data);
+		console.log(str);
+		// console.log(`data = ${data}`, `str = ${str}`);
+	};
+});

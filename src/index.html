@@ -12,7 +12,7 @@
 	<link href="./css/ionic.min.css" rel="stylesheet">
 	<link href="./css/style.css" rel="stylesheet">
 </head>
-<body ng-app="main" ng-controller="base" ng-repeat="(key, value) in dataset">
+<body ng-app="main" ng-controller="base">
 <ion-nav-bar class="nav-title-slide-ios7 bar-positive"></ion-nav-bar>
 
 <ion-nav-view animation="slide-left-right"></ion-nav-view>
@@ -39,32 +39,44 @@
 
 <script id="text.html" type="text/ng-template">
 <ion-view title="文本密码" class="bg-dark">
-<ion-content>
+<ion-content ng-controller="textCtl">
 
 	<h3>一、选择密码的长度6~32</h3>
 	<div class="range range-dark">
-		<input type="range" min="6" max="32" ng-model="passWordLength"/>
-		<label>{{passWordLength}}</label>
+		<input type="range" min="6" max="32"
+		 ng-model="charlen" ng-change="getPassWord()"/>
+		<label>{{charlen}}</label>
 	</div>
 
 	<h3>二、选择随机密码的类型</h3>
 	<div class="row">
 		<div class="col">
-			<ion-toggle ng-repeat="type in types" toggle-class="toggle-calm"
-			 ng-model="type.checked" ng-change="getPassWord()">
+			<ion-toggle ng-repeat="type in types"
+			 toggle-class="toggle-calm"
+			 ng-model="type.checked"
+			 ng-change="getPassWord()"
+			 ng-if="$index % 2 == 0">
 			 	{{type.name}}
 			</ion-toggle>
 		</div>
 		<div class="col">
+			<ion-toggle ng-repeat="type in types"
+			 toggle-class="toggle-calm"
+			 ng-model="type.checked"
+			 ng-change="getPassWord()"
+			 ng-if="$index % 2 == 1">
+			 	{{type.name}}
+			</ion-toggle>
 		</div>
 	</div>
 
 	<h3>三、生成密码</h3>
 	<label class="item item-input">
-		<input type="text" ng-model="result"/>
-		<i class="icon ion-search" ng-click="copy()"></i>
+		<input type="text" ng-model="result" class="result"/>
+		<i class="icon ion-clipboard" ng-click="copy()"></i>
 	</label>
-	<button class="button button-calm" ng-click="getPassWord()">
+	<button class="button button-full button-calm"
+	 ng-click="getPassWord()">
 		 生成密码
 	</button>
 
@@ -74,7 +86,7 @@
 
 <script id="patten.html" type="text/ng-template">
 <ion-view title="图案密码" class="bg-dark">
-<ion-content>
+<ion-content ng-controller="pattenCtl">
 
 </ion-content>
 </ion-view>
@@ -82,7 +94,7 @@
 
 <script id="strong.html" type="text/ng-template">
 <ion-view title="密码强度检测" class="bg-dark">
-<ion-content>
+<ion-content ng-controller="strongCtl">
 
 </ion-content>
 </ion-view>
