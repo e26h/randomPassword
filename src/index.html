@@ -88,6 +88,35 @@
 <ion-view title="图案密码" class="bg-dark">
 <ion-content ng-controller="pattenCtl">
 
+	<h3>选择密码的强度4~9</h3>
+	<div class="range range-dark">
+		<input type="range" min="4" max="9"
+		 ng-model="charlen" ng-change="getPassWord()"/>
+		<label>{{charlen}}</label>
+	</div>
+
+	<div class="card">
+		<div class="row">
+			<div class="col bg-circle"></div>
+			<div class="col bg-circle"></div>
+			<div class="col bg-circle"></div>
+		</div>
+		<div class="row">
+			<div class="col bg-circle"></div>
+			<div class="col bg-circle"></div>
+			<div class="col bg-circle"></div>
+		</div>
+		<div class="row">
+			<div class="col bg-circle"></div>
+			<div class="col bg-circle"></div>
+			<div class="col bg-circle"></div>
+		</div>
+	</div>
+
+	<button class="button button-full button-calm"
+	 ng-click="getPassWord()">
+		 生成密码
+	</button>
 </ion-content>
 </ion-view>
 </script>

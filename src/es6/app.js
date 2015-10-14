@@ -68,7 +68,62 @@ angular.module('main', ['ionic'])
 })
 
 .controller('pattenCtl', ($scope) => {
-	
+	// 1 2 3
+	// 4 5 6
+	// 7 8 9
+	const dict = [
+	//   1 2 3 4 5 6 7 8 9
+		[0,1,0,1,1,1,0,1,0],
+		[1,0,1,1,1,1,1,0,1],
+		[0,1,0,1,1,1,0,1,0],
+		[1,1,1,0,1,0,1,1,1],
+		[1,1,1,1,0,1,1,1,1],
+		[1,1,1,0,1,0,1,1,1],
+		[0,1,0,1,1,1,0,1,0],
+		[1,0,1,1,1,1,1,0,1],
+		[0,1,0,1,1,1,0,1,0]
+	]
+
+	$scope.result = [1,2,3,4,5,6,7,8,9]
+
+	function reOrderArr(arr){
+		for(var k = 0, len = arr.length; k < len; k++){
+			var rnd = parseInt(Math.random()*(len - 1))
+			[arr[len - 1], arr[rnd]] = [arr[rnd], arr[len - 1]]
+		}
+		return arr
+	}
+
+	function passCheck(arr){
+		var len = arr.length,
+			pass = true
+
+		for (var i = 0; i < len - 1; i++) {
+			if (dict[arr[i]][arr[i+1]] === 0){
+				pass = false
+			}
+		};
+		return pass
+	}
+
+	function getPassWord(){
+		var orgin = [1,2,3,4,5,6,7,8,9],
+			found = false,
+			newArr
+
+		while(!found){
+			newArr = reOrderArr(orgin)
+			if (passCheck(newArr)) {
+				found = true
+			};
+		}
+
+		$scope.result = newArr
+	}
+
+	$scope.charlen = 9
+
+	$scope.getPassWord = getPassWord
 })
 
 .controller('strongCtl', ($scope) => {
