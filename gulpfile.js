@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-	scss = require('gulp-scss'),
+	sass = require('gulp-sass'),
 	babel = require('gulp-babel'),
 	ngmin = require('gulp-ngmin'),
 	uglify = require('gulp-uglify'),
@@ -10,8 +10,7 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync'),
 	minifyCss = require('gulp-minify-css'),
 	sourcemaps = require('gulp-sourcemaps'),
-	autoprefixer = require('gulp-autoprefixer'),
-	templateCache = require('gulp-angular-templatecache');
+	autoprefixer = require('gulp-autoprefixer');
 
 
 // const $ = gulpLoadPlugins();
@@ -93,13 +92,13 @@ gulp.task('babel', () => {
 		.pipe(gulp.dest('src/js'))
 });
 
-gulp.task('scss',() => {
-    gulp.src('src/scss/*.scss')
-    	.pipe(scss())
-    	.pipe(gulp.dest('src/scss'))
+gulp.task('sass', () => {
+	gulp.src('src/sass/*.sass')
+		.pipe(sass())
+		.pipe(gulp.dest('src/css'))
 });
 
 gulp.task('watch', () => {
 	gulp.watch('src/es6/*.js', ['babel']);
-	gulp.watch('src/scss/*.scss', ['scss']);
+	gulp.watch('src/sass/*.sass', ['sass']);
 });

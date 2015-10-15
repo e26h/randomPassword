@@ -67,11 +67,16 @@ angular.module('main', ['ionic']).run(function ($ionicPlatform) {
 	//   1 2 3 4 5 6 7 8 9
 	[0, 1, 0, 1, 1, 1, 0, 1, 0], [1, 0, 1, 1, 1, 1, 1, 0, 1], [0, 1, 0, 1, 1, 1, 0, 1, 0], [1, 1, 1, 0, 1, 0, 1, 1, 1], [1, 1, 1, 1, 0, 1, 1, 1, 1], [1, 1, 1, 0, 1, 0, 1, 1, 1], [0, 1, 0, 1, 1, 1, 0, 1, 0], [1, 0, 1, 1, 1, 1, 1, 0, 1], [0, 1, 0, 1, 1, 1, 0, 1, 0]];
 
+	$scope.charlen = 9;
+
 	$scope.result = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 	function reOrderArr(arr) {
 		for (var k = 0, len = arr.length; k < len; k++) {
-			var rnd = parseInt(Math.random() * (len - 1))[(arr[len - 1], arr[rnd])] = [arr[rnd], arr[len - 1]];
+			var rnd = parseInt(Math.random() * (len - 1));
+			var _ref = [arr[rnd], arr[len - 1]];
+			arr[len - 1] = _ref[0];
+			arr[rnd] = _ref[1];
 		}
 		return arr;
 	}
@@ -84,26 +89,29 @@ angular.module('main', ['ionic']).run(function ($ionicPlatform) {
 			if (dict[arr[i]][arr[i + 1]] === 0) {
 				pass = false;
 			}
-		};
+		}
 		return pass;
 	}
 
 	function getPassWord() {
 		var orgin = [1, 2, 3, 4, 5, 6, 7, 8, 9],
 		    found = false,
-		    newArr;
+		    newArr = [];
+
+		var count = 0;
 
 		while (!found) {
 			newArr = reOrderArr(orgin);
 			if (passCheck(newArr)) {
 				found = true;
-			};
+			}
+			count += 1;
 		}
 
-		$scope.result = newArr;
-	}
+		$scope.result = newArr.slice(0, $scope.charlen);
 
-	$scope.charlen = 9;
+		console.log('搜索: ', count, '次');
+	}
 
 	$scope.getPassWord = getPassWord;
 }).controller('strongCtl', function ($scope) {}).filter('col2', function () {

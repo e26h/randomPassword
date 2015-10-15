@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ version="1.0" width="100" height="100">
+	<g>
+		<circle cx="50" cy="50" r="46"
+		 stroke="#ccc" stroke-width="2" fill="#000"/>
+		<circle cx="50" cy="50" r="16"
+		 stroke="#888" stroke-width="1" fill="#ccc"/>
+		<polygon points="50,8 30,30 70,30"
+		 fill="yellowgreen" stroke="#080" stroke-width="1"/>
+	</g>
+</svg>
