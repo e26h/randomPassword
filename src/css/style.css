@@ -1,8 +1,17 @@
 .result {
-  text-align: center; }
+  text-align: center;
+  font-size: 40px; }
 
 .bg-circle {
   border-radius: 50%;
   border: 2px solid lightgreen;
+  background: url("../img/ring.svg") no-repeat;
   width: 118px;
-  height: 118px; }
+  height: 118px;
+  transition: transform 0.5s ease-in-out; }
+
+.noDirect {
+  background: none; }
+
+.end {
+  background: url("../img/ring2.svg") no-repeat; }
