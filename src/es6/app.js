@@ -72,14 +72,14 @@ angular.module('main', ['ionic'])
 
 	var result = [0, 1, 2, 5, 4, 3, 6, 7, 8]
 
-	$scope.arc = ['0','0','90deg','90deg','180deg','180deg','0','0','0']
+	$scope.arc = ['0', '0', '90deg', '90deg', '180deg', '180deg', '0', '0', '0']
 
-	$scope.noHasDirect = [false,false,false,false,false,false,false,false,false]
+	$scope.noHasDirect = [false, false, false, false, false, false, false, false, false]
 
-	$scope.isEnd = [false,false,false,false,false,false,false,false,false]
-	// 0 1 2
-	// 3 4 5
-	// 6 7 8
+	$scope.isEnd = [false, false, false, false, false, false, false, false, true]
+		// 0 1 2
+		// 3 4 5
+		// 6 7 8
 	const dict = [
 		//   0 1 2 3 4 5 6 7 8
 		[0, 1, 0, 1, 1, 1, 0, 1, 0],
@@ -95,15 +95,15 @@ angular.module('main', ['ionic'])
 
 	// direct error
 	const direct = [
-		[0.0, 0, 0, 90, 45, 26.6, 90, 63.4, 45],
-		[0, 0.0, 0, -45, 90, 45, -63.4, 90, 63.4],
-		[0, 0, 0.0, -26.6, -45, 90, -45, -63.4, 90],
-		[90, -45, -26.6, 0.0, 0, 0, 90, 45, 26.6],
-		[45, -90, -45, 0, 0.0, 0, -45, 90, 45],
-		[26.6, 45, -90, 0, 0, 0.0, -26.6, -45, 90],
-		[90, -63.4, -45, -90, -45, -26.6, 0.0, 0, 0],
-		[63.4, -90, -63.4, 45, -90, -45, 0, 0.0, 0],
-		[45, 63.4, -90, 26.6, 45, -90, 0, 0, 0.0]
+		[ null, 0, 0, 90, 45, 26.6, 90, 63.4, 45 ],
+		[ 180, null, 0, 135, 90, 45, 116.6, 90, 63.4 ],
+		[ 180, 180, null, 153.4, 135, 90, 135, 116.6, 90 ],
+		[ -90,-45, -26.6, null, 0, 0, 90, 45, 26.6 ],
+		[ -135, -90, -45, 180, null, 0, 135, 90, 45 ],
+		[ -153.4, -135, -90, 180, 180, null, 153.4, 135, 90 ],
+		[ -90,-63.4,-45,-90,-45,-26.6,null,0,0 ],
+		[ -116.6, -90, -63.4, -135, -90, -45, 180, null, 0 ],
+		[ -135, -116.6, -90, -153.4, -135, -90, 180, 180, null ]
 	]
 
 	function reOrderArr(arr) {
@@ -129,10 +129,10 @@ angular.module('main', ['ionic'])
 		return true
 	}
 
-	function passWord2patten(arr){
+	function passWord2patten(arr) {
 		var dir, from, to,
 			arc = new Array($scope.charlen),
-			noHasDirect = [true,true,true,true,true,true,true,true,true]
+			noHasDirect = [true, true, true, true, true, true, true, true, true]
 
 		for (var i = 0; i < arr.length; i++) {
 			noHasDirect[arr[i]] = false
@@ -142,14 +142,14 @@ angular.module('main', ['ionic'])
 
 		for (var i = 0, len = arr.length - 1; i < len; i++) {
 			from = arr[i]
-			to = arr[i+1]
+			to = arr[i + 1]
 			dir = direct[from][to]
-			if (dir !== 0){
-				arc[from] = dir+'deg'
+			if (dir !== 0) {
+				arc[from] = dir + 'deg'
 			}
 		}
 
-		$scope.isEnd = [false,false,false,false,false,false,false,false,false]
+		$scope.isEnd = [false, false, false, false, false, false, false, false, false]
 		$scope.isEnd[arr[arr.length - 1]] = true
 		$scope.arc = arc
 	}
@@ -192,4 +192,4 @@ angular.module('main', ['ionic'])
 	}
 })
 
-.filter('addDeg', () => (input) => input == 0 ? 0 : input+'deg')
+.filter('addDeg', () => (input) => input == 0 ? 0 : input + 'deg')

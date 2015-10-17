@@ -2,16 +2,35 @@
   text-align: center;
   font-size: 40px; }
 
+.box > .row > .col {
+  width: 115px;
+  height: 115px;
+  position: relative; }
+
 .bg-circle {
   border-radius: 50%;
   border: 2px solid lightgreen;
   background: url("../img/ring.svg") no-repeat;
-  width: 118px;
-  height: 118px;
-  transition: transform 0.5s ease-in-out; }
+  width: 57.5px;
+  height: 57.5px;
+  transition: transform ease-in-out 0.6s, opacity linear 0.5s;
+  opacity: 1; }
 
 .noDirect {
-  background: none; }
+  opacity: 0; }
 
 .end {
   background: url("../img/ring2.svg") no-repeat; }
+
+.right {
+  float: right; }
+
+.center {
+  margin: 0 auto; }
+
+.row2 .bg-circle {
+  top: 28.75px; }
+
+.row3 .bg-circle {
+  position: relative;
+  bottom: 0; }

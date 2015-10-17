@@ -1,21 +1,43 @@
 $green : #0f0
-$box : 118px
+$box : 115px
 $red : #f00
+$circle : $box/2
+
 
 .result
 	text-align: center
 	font-size: 40px
 
+.box>.row>.col
+	width: $box
+	height: $box
+	position: relative
+
 .bg-circle
 	border-radius: 50%
 	border: 2px solid lightgreen
 	background: url("../img/ring.svg") no-repeat
-	width: $box
-	height: $box
-	transition: transform .5s ease-in-out
+	width: $circle
+	height: $circle
+	transition: transform ease-in-out .6s , opacity linear .5s
+	opacity: 1
 
 .noDirect
-	background: none
+	opacity: 0
 
 .end
 	background: url("../img/ring2.svg") no-repeat
+
+.right
+	float:right;
+
+.center
+	margin: 0 auto
+
+.row2 .bg-circle
+	top: $box/2 - $circle/2
+
+.row3 .bg-circle
+	position: relative
+	bottom: 0
+	// top: $box - $circle
