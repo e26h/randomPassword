@@ -8,6 +8,7 @@
   position: relative; }
 
 .bg-circle {
+  position: absolute;
   border-radius: 50%;
   border: 2px solid lightgreen;
   background: url("../img/ring.svg") no-repeat;
@@ -22,15 +23,15 @@
 .end {
   background: url("../img/ring2.svg") no-repeat; }
 
-.right {
-  float: right; }
-
 .center {
-  margin: 0 auto; }
+  left: 28.75px; }
+
+.right {
+  right: 0; }
 
 .row2 .bg-circle {
-  top: 28.75px; }
+  top: 50%;
+  margin-top: -28.75px; }
 
 .row3 .bg-circle {
-  position: relative;
   bottom: 0; }

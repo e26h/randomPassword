@@ -41,11 +41,10 @@
 <ion-view title="文本密码" class="bg-dark">
 <ion-content ng-controller="textCtl">
 
-	<h3>一、选择密码的长度6~32</h3>
+	<h3>一、选择密码的长度: <span>{{charlen}}</span></h3>
 	<div class="range range-dark">
-		<input type="range" min="6" max="32"
+		<input type="range" min="6" max="24"
 		 ng-model="charlen" ng-change="getPassWord()"/>
-		<label>{{charlen}}</label>
 	</div>
 
 	<h3>二、选择随机密码的类型</h3>
@@ -71,13 +70,9 @@
 	</div>
 
 	<h3>三、生成密码</h3>
-	<label class="item item-input">
-		<input type="text" ng-model="result" class="result"/>
-		<i class="icon ion-clipboard" ng-click="copy()"></i>
-	</label>
-	<button class="button button-full button-calm"
+	<button class="button button-block button-positive button-large"
 	 ng-click="getPassWord()">
-		 生成密码
+		 {{result}}
 	</button>
 
 </ion-content>
@@ -149,7 +144,7 @@
 		</div>
 	</div>
 
-	<button class="button button-full button-calm"
+	<button class="button button-full button-calm button-large"
 	 ng-click="getPassWord()">
 		 生成密码
 	</button>

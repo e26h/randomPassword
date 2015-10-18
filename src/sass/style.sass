@@ -14,6 +14,7 @@ $circle : $box/2
 	position: relative
 
 .bg-circle
+	position: absolute
 	border-radius: 50%
 	border: 2px solid lightgreen
 	background: url("../img/ring.svg") no-repeat
@@ -28,16 +29,15 @@ $circle : $box/2
 .end
 	background: url("../img/ring2.svg") no-repeat
 
-.right
-	float:right;
-
 .center
-	margin: 0 auto
+	left: $box/2 - $circle/2
+
+.right
+	right: 0
 
 .row2 .bg-circle
-	top: $box/2 - $circle/2
+	top: 50%;
+	margin-top: -$circle/2;
 
 .row3 .bg-circle
-	position: relative
 	bottom: 0
-	// top: $box - $circle
